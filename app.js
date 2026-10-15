@@ -64,7 +64,7 @@ class LuxuryAudioEngine {
 
 const audioEngine = new LuxuryAudioEngine();
 
-document.addEventListener('DOMContentLoaded', () => {
+function startApp() {
     initOneWeekTimer();
     initBrochureModalControls();
     initBrochureDownload();
@@ -75,7 +75,13 @@ document.addEventListener('DOMContentLoaded', () => {
     if (window.lucide) {
         window.lucide.createIcons();
     }
-});
+}
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', startApp);
+} else {
+    startApp();
+}
 
 /* ==========================================================================
    1. 7-DAY COUNTDOWN TIMER
