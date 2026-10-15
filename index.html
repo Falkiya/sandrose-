@@ -3,158 +3,93 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SandRose | Premium Wooden Gifting • Coming Soon Official Brochure</title>
+    <title>SandRose | Coming Soon</title>
     
-    <meta name="description" content="SandRose is an upcoming luxury wooden gifting atelier. Authentic Mysore Sandalwood and Imperial Rosewood masterpieces. Official digital atelier brochure.">
+    <meta name="description" content="SandRose - Premium Wooden Gifting. Made from Authentic Sandalwood & Rosewood. Coming Soon.">
     <meta name="theme-color" content="#0B0806">
 
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="assets/favicon.png">
 
-    <!-- Stylesheets -->
-    <link rel="stylesheet" href="styles.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 
-    <!-- External Libraries -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.263.1/umd/lucide.min.js" defer></script>
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js" defer></script>
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-    <!-- Ambient Luxury Background -->
+    <!-- Ambient Subtle Background -->
     <div class="ambient-glow-bg"></div>
-    <div class="wood-grain-overlay"></div>
 
-    <!-- Minimalist Header -->
-    <header class="minimal-header">
-        <div class="brand-emblem">
-            <img src="assets/monogram.png" alt="SandRose" class="brand-monogram-img">
-            <div class="brand-label">
-                <span class="brand-name">SandRose</span>
-                <span class="brand-tag">Bespoke Wooden Gifting</span>
-            </div>
-        </div>
-
-        <div class="header-right-actions">
-            <button id="header-download-btn" class="btn-gold-header" onclick="document.getElementById('download-brochure-btn').click();" aria-label="Download Brochure">
-                <i data-lucide="download"></i>
-                <span>Download Brochure</span>
-            </button>
-        </div>
-    </header>
-
-    <!-- Main Content: Directly Display The Single Page Brochure -->
-    <main class="brochure-page-container">
-        <div class="brochure-sheet-wrapper">
+    <!-- Main Container (Centered Landing Page) -->
+    <main class="landing-container">
+        
+        <!-- Luxury Card -->
+        <div class="landing-card">
             
-            <article class="single-page-brochure">
-                
-                <!-- Corner Filigree Ornaments -->
-                <div class="filigree-corner top-left"></div>
-                <div class="filigree-corner top-right"></div>
-                <div class="filigree-corner bottom-left"></div>
-                <div class="filigree-corner bottom-right"></div>
+            <!-- Corner Filigree Accents -->
+            <div class="corner-accent top-left"></div>
+            <div class="corner-accent top-right"></div>
+            <div class="corner-accent bottom-left"></div>
+            <div class="corner-accent bottom-right"></div>
 
-                <!-- 1. The Official Logo Plaque (100% Crisp & High Contrast) -->
-                <div class="brochure-logo-frame">
-                    <img src="assets/logo.jpg" alt="SandRose - Premium Wooden Gifting • Made from Authentic Sandalwood & Rosewood" class="brochure-logo-img">
+            <!-- Authentic SandRose Logo Plaque -->
+            <div class="logo-wrapper">
+                <img src="assets/logo.jpg" alt="SandRose - Premium Wooden Gifting • Made from Authentic Sandalwood & Rosewood" class="logo-image">
+            </div>
+
+            <!-- Coming Soon Heading -->
+            <div class="heading-group">
+                <span class="badge">Atelier Premiere</span>
+                <h1 class="coming-soon-title">COMING SOON</h1>
+                <p class="tagline">Crafting timeless wooden gifting heirlooms. Launching soon.</p>
+            </div>
+
+            <!-- 1-Week Countdown Timer -->
+            <div class="timer-container">
+                <div class="timer-box">
+                    <span class="timer-number" id="timer-days">07</span>
+                    <span class="timer-label">Days</span>
                 </div>
-
-                <!-- 2. Header & Coming Soon Announcement -->
-                <div class="brochure-title-group">
-                    <div class="brochure-top-badge">
-                        <i data-lucide="sparkles"></i>
-                        <span>Official Atelier Lookbook • Volume 01</span>
-                    </div>
-
-                    <h1 class="brochure-coming-soon-title gold-text-shimmer">
-                        COMING SOON
-                    </h1>
-
-                    <p class="brochure-subtitle">
-                        An ultra-rare gifting atelier is taking shape. Every piece is chiseled from certified authentic Mysore Sandalwood and Imperial Rosewood, engineered as an heirloom for generations.
-                    </p>
+                <span class="timer-colon">:</span>
+                <div class="timer-box">
+                    <span class="timer-number" id="timer-hours">00</span>
+                    <span class="timer-label">Hours</span>
                 </div>
-
-                <!-- 3. 1-Week Live Countdown Timer -->
-                <div class="brochure-timer-card">
-                    <div class="timer-card-title">
-                        <i data-lucide="clock"></i>
-                        <span>Grand Premiere Countdown (1 Week Remaining)</span>
-                    </div>
-
-                    <div class="timer-units-row">
-                        <div class="timer-unit-block">
-                            <span class="timer-num" id="timer-days">07</span>
-                            <span class="timer-label">Days</span>
-                        </div>
-                        <span class="timer-sep">:</span>
-                        <div class="timer-unit-block">
-                            <span class="timer-num" id="timer-hours">00</span>
-                            <span class="timer-label">Hours</span>
-                        </div>
-                        <span class="timer-sep">:</span>
-                        <div class="timer-unit-block">
-                            <span class="timer-num" id="timer-minutes">00</span>
-                            <span class="timer-label">Mins</span>
-                        </div>
-                        <span class="timer-sep">:</span>
-                        <div class="timer-unit-block">
-                            <span class="timer-num" id="timer-seconds">00</span>
-                            <span class="timer-label">Secs</span>
-                        </div>
-                    </div>
+                <span class="timer-colon">:</span>
+                <div class="timer-box">
+                    <span class="timer-number" id="timer-minutes">00</span>
+                    <span class="timer-label">Minutes</span>
                 </div>
-
-                <!-- 4. Certified Botanical Duality -->
-                <div class="brochure-duality-bar">
-                    <div class="duality-half">
-                        <span class="wood-badge gold-badge">Authentic Sandalwood</span>
-                        <p class="wood-mini-text"><em>Santalum album</em> • Decades-long permanent aroma • Cashmere-smooth grain</p>
-                    </div>
-                    <div class="duality-divider"></div>
-                    <div class="duality-half">
-                        <span class="wood-badge rose-badge">Imperial Rosewood</span>
-                        <p class="wood-mini-text"><em>Dalbergia latifolia</em> • Deep violet-crimson veins • Resonant acoustic density</p>
-                    </div>
+                <span class="timer-colon">:</span>
+                <div class="timer-box">
+                    <span class="timer-number" id="timer-seconds">00</span>
+                    <span class="timer-label">Seconds</span>
                 </div>
+            </div>
 
-                <!-- 5. VIP Early Access Reservation -->
-                <div class="brochure-vip-card">
-                    <div class="vip-card-header">
-                        <h3 class="vip-headline">Reserve Priority Access for Batch 001</h3>
-                        <p class="vip-sub">Founding patrons receive guaranteed allocation, private 48-hour preview, and complimentary bespoke gold leaf monogramming.</p>
-                    </div>
-
-                    <form id="notify-form" class="vip-brochure-form">
-                        <div class="vip-input-row">
-                            <input type="email" id="notify-email" class="vip-brochure-input" placeholder="Enter your private email address" required>
-                            <button type="submit" class="btn-gold">
-                                <i data-lucide="crown"></i>
-                                <span>Reserve VIP Pass</span>
-                            </button>
-                        </div>
-                        <p class="notify-feedback" id="notify-feedback"></p>
-                    </form>
+            <!-- Simple Notify Me Form -->
+            <form id="notify-form" class="notify-form">
+                <div class="input-group">
+                    <input type="email" id="notify-email" placeholder="Enter your email address" required aria-label="Email address">
+                    <button type="submit" class="notify-btn">Notify Me</button>
                 </div>
+                <p id="notify-msg" class="notify-msg"></p>
+            </form>
 
-                <!-- 6. Action Footer -->
-                <div class="brochure-footer-actions">
-                    <button class="btn-gold" id="download-brochure-btn">
-                        <i data-lucide="download"></i>
-                        <span>Download Single-Page Brochure</span>
-                    </button>
-                </div>
-
-                <div class="brochure-copyright">
-                    <span>&copy; 2026 SandRose Atelier. Handcrafted from Authentic Sandalwood & Rosewood. All rights reserved.</span>
-                </div>
-
-            </article>
+            <!-- Minimal Footer -->
+            <footer class="card-footer">
+                <p>&copy; 2026 SandRose. All rights reserved.</p>
+            </footer>
 
         </div>
+
     </main>
 
     <!-- Application Script -->
-    <script src="app.js" defer></script>
+    <script src="app.js"></script>
 </body>
 </html>
