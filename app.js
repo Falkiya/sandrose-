@@ -1,75 +1,15 @@
 /**
- * SandRose - Single Page Brochure Experience Engine
+ * SandRose - Luxury Single-Page Brochure Engine
  * Features:
  * - 1-Week (7 Days) Live Precision Countdown
- * - 3D Box Unbox Ceremony: 360° Spin, Fog Spread, Glitters & Mini Gift Boxes
- * - Single-Page Brochure Display on Box Click with smooth Up-Down Scrollability
- * - High-Res Single Page Brochure PNG Downloader via Canvas
- * - Luxury Web Audio Chimes
+ * - High-Res Single Page Brochure PNG Downloader via HTML5 Canvas
+ * - VIP Early Access Reservation
+ * - Lucide Icon Initializer
  */
-
-let soundEnabled = true;
-
-// Web Audio API Synthesizer
-class LuxuryAudioEngine {
-    constructor() {
-        this.ctx = null;
-    }
-
-    init() {
-        if (!this.ctx) {
-            const AudioContext = window.AudioContext || window.webkitAudioContext;
-            if (AudioContext) {
-                this.ctx = new AudioContext();
-            }
-        }
-        if (this.ctx && this.ctx.state === 'suspended') {
-            this.ctx.resume();
-        }
-    }
-
-    playChord(freqs, type = 'sine', duration = 1.4, gainLevel = 0.1) {
-        if (!soundEnabled) return;
-        this.init();
-        if (!this.ctx) return;
-
-        const now = this.ctx.currentTime;
-        freqs.forEach((freq, idx) => {
-            const osc = this.ctx.createOscillator();
-            const gain = this.ctx.createGain();
-
-            osc.type = type;
-            osc.frequency.setValueAtTime(freq, now + idx * 0.05);
-
-            gain.gain.setValueAtTime(0.001, now + idx * 0.05);
-            gain.gain.exponentialRampToValueAtTime(gainLevel / freqs.length, now + idx * 0.05 + 0.08);
-            gain.gain.exponentialRampToValueAtTime(0.0001, now + duration + idx * 0.05);
-
-            osc.connect(gain);
-            gain.connect(this.ctx.destination);
-
-            osc.start(now + idx * 0.05);
-            osc.stop(now + duration + idx * 0.05 + 0.1);
-        });
-    }
-
-    playOpen() {
-        this.playChord([329.63, 415.30, 493.88, 659.25, 830.61, 987.77], 'sine', 2.2, 0.16);
-    }
-
-    playClose() {
-        this.playChord([220.00, 277.18, 329.63], 'triangle', 0.6, 0.08);
-    }
-}
-
-const audioEngine = new LuxuryAudioEngine();
 
 function startApp() {
     initOneWeekTimer();
-    initBrochureModalControls();
     initBrochureDownload();
-    initSoundToggle();
-    initCustomCursor();
     initNotifyForm();
 
     if (window.lucide) {
@@ -84,7 +24,7 @@ if (document.readyState === 'loading') {
 }
 
 /* ==========================================================================
-   1. 7-DAY COUNTDOWN TIMER
+   1. 7-DAY LIVE COUNTDOWN TIMER
    ========================================================================== */
 function initOneWeekTimer() {
     const STORAGE_KEY = 'sandrose_7day_timer_target';
@@ -132,105 +72,7 @@ function initOneWeekTimer() {
 }
 
 /* ==========================================================================
-   2. SINGLE PAGE BROCHURE MODAL ORCHESTRATION
-   ========================================================================== */
-function initBrochureModalControls() {
-    const modalEl = document.getElementById('brochure-modal');
-    const fogEl = document.getElementById('mystic-fog-container');
-    const hintPill = document.getElementById('giftbox-prompt-pill');
-    const closeBtn = document.getElementById('close-brochure-btn');
-    const bottomResealBtn = document.getElementById('bottom-reseal-btn');
-    const openBrochureNavBtn = document.getElementById('open-brochure-nav-btn');
-
-    // Called automatically when the 3D box is clicked/opened
-    window.onSandRoseBoxOpened = function () {
-        if (fogEl) {
-            fogEl.classList.add('active');
-        }
-
-        audioEngine.playOpen();
-
-        if (hintPill) {
-            hintPill.classList.add('hidden');
-        }
-
-        // Open the Single Page Brochure after the box completes its 360 rotation & mini boxes burst
-        setTimeout(() => {
-            if (modalEl) {
-                modalEl.classList.add('active');
-                // Scroll brochure to top when opened
-                modalEl.scrollTop = 0;
-            }
-        }, 1350);
-    };
-
-    window.onSandRoseBoxClosed = function () {
-        if (modalEl) {
-            modalEl.classList.remove('active');
-        }
-        if (fogEl) {
-            fogEl.classList.remove('active');
-        }
-        if (hintPill) {
-            hintPill.classList.remove('hidden');
-        }
-        audioEngine.playClose();
-    };
-
-    function requestClose() {
-        if (window.sandroseCloseVault) {
-            window.sandroseCloseVault();
-        } else {
-            window.onSandRoseBoxClosed();
-        }
-    }
-
-    if (closeBtn) {
-        closeBtn.addEventListener('click', requestClose);
-    }
-    if (bottomResealBtn) {
-        bottomResealBtn.addEventListener('click', requestClose);
-    }
-
-    // Close when clicking outside the brochure sheet
-    if (modalEl) {
-        modalEl.addEventListener('click', (e) => {
-            if (e.target === modalEl) {
-                requestClose();
-            }
-        });
-    }
-
-    // Header Open Brochure button
-    if (openBrochureNavBtn) {
-        openBrochureNavBtn.addEventListener('click', () => {
-            if (window.sandroseOpenVault) {
-                window.sandroseOpenVault();
-            } else {
-                window.onSandRoseBoxOpened();
-            }
-        });
-    }
-
-    // Prompt pill click opens the box
-    if (hintPill) {
-        hintPill.addEventListener('click', () => {
-            if (window.sandroseOpenVault) {
-                window.sandroseOpenVault();
-            }
-        });
-    }
-
-    // Escape key closes/reseals
-    window.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && modalEl && modalEl.classList.contains('active')) {
-            requestClose();
-        }
-    });
-}
-
-/* ==========================================================================
-   3. DOWNLOAD SINGLE PAGE BROCHURE VIA CANVAS
+   2. DOWNLOAD SINGLE PAGE BROCHURE VIA CANVAS
    ========================================================================== */
 function initBrochureDownload() {
     const downloadBtn = document.getElementById('download-brochure-btn');
@@ -239,25 +81,25 @@ function initBrochureDownload() {
     downloadBtn.addEventListener('click', () => {
         const canvas = document.createElement('canvas');
         canvas.width = 1100;
-        canvas.height = 700;
+        canvas.height = 720;
         const ctx = canvas.getContext('2d');
 
         // Dark Luxury Rosewood folio background
-        const grad = ctx.createLinearGradient(0, 0, 1100, 700);
+        const grad = ctx.createLinearGradient(0, 0, 1100, 720);
         grad.addColorStop(0, '#1c0c0a');
         grad.addColorStop(0.5, '#0e0706');
         grad.addColorStop(1, '#24100e');
         ctx.fillStyle = grad;
-        ctx.fillRect(0, 0, 1100, 700);
+        ctx.fillRect(0, 0, 1100, 720);
 
         // Gold Foil Border
         ctx.strokeStyle = '#e5b869';
         ctx.lineWidth = 4;
-        ctx.strokeRect(30, 30, 1040, 640);
+        ctx.strokeRect(30, 30, 1040, 660);
 
         ctx.strokeStyle = 'rgba(229, 184, 105, 0.4)';
         ctx.lineWidth = 1;
-        ctx.strokeRect(42, 42, 1016, 616);
+        ctx.strokeRect(42, 42, 1016, 636);
 
         // Title
         ctx.fillStyle = '#e5b869';
@@ -267,7 +109,6 @@ function initBrochureDownload() {
 
         ctx.fillStyle = 'rgba(255, 235, 195, 0.85)';
         ctx.font = '14px "Plus Jakarta Sans", sans-serif';
-        ctx.letterSpacing = '3px';
         ctx.fillText('PREMIUM WOODEN GIFTING • OFFICIAL ATELIER BROCHURE', 550, 145);
 
         // Divider
@@ -296,7 +137,7 @@ function initBrochureDownload() {
         ctx.fillText('• IMPERIAL INDIAN ROSEWOOD (Dalbergia latifolia)', 80, 355);
         ctx.fillStyle = '#d4c8b8';
         ctx.font = '14px "Plus Jakarta Sans", sans-serif';
-        ctx.fillText('  Hypnotic crimson veins, heirloom density, and resonant acoustic acoustics with mirror luster.', 80, 380);
+        ctx.fillText('  Hypnotic crimson veins, heirloom density, and resonant acoustic harmonics with mirror luster.', 80, 380);
 
         ctx.fillStyle = '#e5b869';
         ctx.font = 'bold 15px "Plus Jakarta Sans", sans-serif';
@@ -324,7 +165,7 @@ function initBrochureDownload() {
         ctx.fillText('HEIRLOOMS', 920, 372);
 
         const link = document.createElement('a');
-        link.download = 'SandRose_Single_Page_Brochure.png';
+        link.download = 'SandRose_Official_Brochure.png';
         link.href = canvas.toDataURL('image/png');
         link.click();
 
@@ -340,30 +181,7 @@ function initBrochureDownload() {
 }
 
 /* ==========================================================================
-   4. SOUND TOGGLE
-   ========================================================================== */
-function initSoundToggle() {
-    const soundBtn = document.getElementById('sound-toggle-btn');
-    if (!soundBtn) return;
-
-    soundBtn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        soundEnabled = !soundEnabled;
-        if (soundEnabled) {
-            soundBtn.innerHTML = `<i data-lucide="volume-2"></i><span>Sound: ON</span>`;
-            soundBtn.classList.remove('muted');
-            audioEngine.init();
-            audioEngine.playChord([523.25, 659.25], 'sine', 0.4, 0.05);
-        } else {
-            soundBtn.innerHTML = `<i data-lucide="volume-x"></i><span>Sound: OFF</span>`;
-            soundBtn.classList.add('muted');
-        }
-        if (window.lucide) window.lucide.createIcons();
-    });
-}
-
-/* ==========================================================================
-   5. NOTIFY FORM
+   3. VIP NOTIFY FORM
    ========================================================================== */
 function initNotifyForm() {
     const form = document.getElementById('notify-form');
@@ -376,7 +194,7 @@ function initNotifyForm() {
             const email = input.value.trim();
             if (!email) return;
 
-            localStorage.setItem('sandrose_subscriber', email);
+            localStorage.setItem('sandrose_vip_email', email);
             input.value = '';
 
             if (feedback) {
@@ -386,7 +204,7 @@ function initNotifyForm() {
 
             if (typeof confetti === 'function') {
                 confetti({
-                    particleCount: 70,
+                    particleCount: 60,
                     spread: 80,
                     origin: { y: 0.8 },
                     colors: ['#e6b85c', '#d6a354', '#8a2323']
@@ -394,39 +212,4 @@ function initNotifyForm() {
             }
         });
     }
-}
-
-/* ==========================================================================
-   6. CUSTOM CURSOR
-   ========================================================================== */
-function initCustomCursor() {
-    const cursorDot = document.querySelector('.custom-cursor-dot');
-    const cursorRing = document.querySelector('.custom-cursor-ring');
-
-    if (!cursorDot || !cursorRing) return;
-
-    let mouseX = window.innerWidth / 2;
-    let mouseY = window.innerHeight / 2;
-    let ringX = mouseX;
-    let ringY = mouseY;
-
-    window.addEventListener('mousemove', (e) => {
-        mouseX = e.clientX;
-        mouseY = e.clientY;
-        cursorDot.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0)`;
-    });
-
-    function renderRing() {
-        ringX += (mouseX - ringX) * 0.15;
-        ringY += (mouseY - ringY) * 0.15;
-        cursorRing.style.transform = `translate3d(${ringX}px, ${ringY}px, 0)`;
-        requestAnimationFrame(renderRing);
-    }
-    renderRing();
-
-    const hoverables = document.querySelectorAll('button, a, input, .clickable');
-    hoverables.forEach(el => {
-        el.addEventListener('mouseenter', () => cursorRing.classList.add('cursor-hover'));
-        el.addEventListener('mouseleave', () => cursorRing.classList.remove('cursor-hover'));
-    });
 }

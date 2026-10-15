@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SandRose | Premium Wooden Gifting • Coming Soon Brochure</title>
+    <title>SandRose | Premium Wooden Gifting • Coming Soon Official Brochure</title>
     
-    <meta name="description" content="SandRose is an upcoming luxury wooden gifting atelier. Authentic Mysore Sandalwood and Imperial Rosewood masterpieces. Open the gift box to view the official digital brochure.">
+    <meta name="description" content="SandRose is an upcoming luxury wooden gifting atelier. Authentic Mysore Sandalwood and Imperial Rosewood masterpieces. Official digital atelier brochure.">
     <meta name="theme-color" content="#0B0806">
 
     <!-- Favicon -->
@@ -14,90 +14,47 @@
     <!-- Stylesheets -->
     <link rel="stylesheet" href="styles.css">
 
-    <!-- External Libraries (Fast, non-blocking CDN with defer) -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js" defer></script>
+    <!-- External Libraries -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.263.1/umd/lucide.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js" defer></script>
 </head>
 <body>
 
-    <!-- Custom Cursor -->
-    <div class="custom-cursor-dot"></div>
-    <div class="custom-cursor-ring"></div>
-
-    <!-- Ambient Luxury Background Lights -->
-    <div class="ambient-glow-bg">
-        <div class="glow-orb glow-orb-amber"></div>
-        <div class="glow-orb glow-orb-rose"></div>
-        <div class="glow-orb glow-orb-center"></div>
-    </div>
+    <!-- Ambient Luxury Background -->
+    <div class="ambient-glow-bg"></div>
     <div class="wood-grain-overlay"></div>
-
-    <!-- Mystical Atmospheric Fog / Sandalwood Mist Layers -->
-    <div class="mystic-fog-container" id="mystic-fog-container">
-        <div class="fog-layer fog-layer-1"></div>
-        <div class="fog-layer fog-layer-2"></div>
-        <div class="fog-layer fog-layer-3"></div>
-    </div>
 
     <!-- Minimalist Header -->
     <header class="minimal-header">
-        <a href="#" class="brand-emblem" onclick="window.sandroseOpenVault(); return false;">
+        <div class="brand-emblem">
             <img src="assets/monogram.png" alt="SandRose" class="brand-monogram-img">
             <div class="brand-label">
                 <span class="brand-name">SandRose</span>
                 <span class="brand-tag">Bespoke Wooden Gifting</span>
             </div>
-        </a>
+        </div>
 
         <div class="header-right-actions">
-            <button id="open-brochure-nav-btn" class="brochure-nav-btn" aria-label="Open Brochure">
-                <i data-lucide="book-open"></i>
-                <span>Open Brochure</span>
-            </button>
-
-            <button id="sound-toggle-btn" class="sound-toggle-btn" aria-label="Toggle chimes">
-                <i data-lucide="volume-2"></i>
-                <span>Sound: ON</span>
+            <button id="header-download-btn" class="btn-gold-header" onclick="document.getElementById('download-brochure-btn').click();" aria-label="Download Brochure">
+                <i data-lucide="download"></i>
+                <span>Download Brochure</span>
             </button>
         </div>
     </header>
 
-    <!-- Main Fullscreen Stage: Only The 3D Gift Box -->
-    <main class="main-3d-stage">
-        <div id="three-canvas-container"></div>
-        
-        <!-- Interactive Prompt Pill Below Gift Box -->
-        <div class="giftbox-prompt-pill" id="giftbox-prompt-pill">
-            <span class="sparkle-icon">✦</span>
-            <span>Tap Box to Open Official Brochure • Drag to Rotate</span>
-            <span class="sparkle-icon">✦</span>
-        </div>
-    </main>
-
-    <!-- =================================================================
-         THE SINGLE PAGE BROCHURE MODAL (OPENS ON BOX CLICK)
-         Smoothly scrollable up-down to view the complete brochure sheet
-         ================================================================= -->
-    <div class="brochure-modal-overlay" id="brochure-modal" role="dialog" aria-modal="true">
+    <!-- Main Content: Directly Display The Single Page Brochure -->
+    <main class="brochure-page-container">
         <div class="brochure-sheet-wrapper">
             
             <article class="single-page-brochure">
                 
-                <!-- Close / Reseal Button -->
-                <button class="close-brochure-btn" id="close-brochure-btn" aria-label="Close Brochure & Reseal Box">
-                    <i data-lucide="x"></i>
-                    <span>Reseal Box</span>
-                </button>
-
                 <!-- Corner Filigree Ornaments -->
                 <div class="filigree-corner top-left"></div>
                 <div class="filigree-corner top-right"></div>
                 <div class="filigree-corner bottom-left"></div>
                 <div class="filigree-corner bottom-right"></div>
 
-                <!-- 1. The Official Logo Plaque (100% Crisp & Fully Legible) -->
+                <!-- 1. The Official Logo Plaque (100% Crisp & High Contrast) -->
                 <div class="brochure-logo-frame">
                     <img src="assets/logo.jpg" alt="SandRose - Premium Wooden Gifting • Made from Authentic Sandalwood & Rosewood" class="brochure-logo-img">
                 </div>
@@ -148,8 +105,7 @@
                     </div>
                 </div>
 
-
-                <!-- 5. Certified Botanical Duality -->
+                <!-- 4. Certified Botanical Duality -->
                 <div class="brochure-duality-bar">
                     <div class="duality-half">
                         <span class="wood-badge gold-badge">Authentic Sandalwood</span>
@@ -162,7 +118,7 @@
                     </div>
                 </div>
 
-                <!-- 6. VIP Early Access Reservation -->
+                <!-- 5. VIP Early Access Reservation -->
                 <div class="brochure-vip-card">
                     <div class="vip-card-header">
                         <h3 class="vip-headline">Reserve Priority Access for Batch 001</h3>
@@ -181,15 +137,11 @@
                     </form>
                 </div>
 
-                <!-- 7. Action Footer -->
+                <!-- 6. Action Footer -->
                 <div class="brochure-footer-actions">
                     <button class="btn-gold" id="download-brochure-btn">
                         <i data-lucide="download"></i>
                         <span>Download Single-Page Brochure</span>
-                    </button>
-                    <button class="btn-outline-gold" id="bottom-reseal-btn">
-                        <i data-lucide="box"></i>
-                        <span>Reseal 3D Gift Box</span>
                     </button>
                 </div>
 
@@ -200,10 +152,9 @@
             </article>
 
         </div>
-    </div>
+    </main>
 
-    <!-- Application Scripts -->
-    <script src="three-scene.js" defer></script>
+    <!-- Application Script -->
     <script src="app.js" defer></script>
 </body>
 </html>

@@ -1,20 +1,20 @@
 /* ==========================================================================
-   SandRose - Single Page Brochure Experience Stylesheet
-   Focus: 3D Floating Wooden Gift Box & Single-Page Scrollable Brochure Sheet
+   SandRose - Single Page Luxury Brochure Stylesheet
+   Focus: Direct Single-Page High-Contrast Brochure (Zero Complex Animations, Instant 60FPS)
    ========================================================================== */
 
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
 
 :root {
-    --bg-main: #0A0705;
+    --bg-main: #0B0806;
     --gold-primary: #E5B869;
     --gold-light: #FDE4B0;
     --gold-dark: #A6792D;
-    --gold-glow: rgba(229, 184, 105, 0.4);
+    --gold-glow: rgba(229, 184, 105, 0.35);
 
     --rosewood-primary: #852422;
     --rosewood-dark: #380C0B;
-    --rosewood-glow: rgba(133, 36, 34, 0.35);
+    --rosewood-glow: rgba(133, 36, 34, 0.3);
 
     --text-primary: #F8F3EB;
     --text-secondary: #C8BAA8;
@@ -27,7 +27,7 @@
     --font-serif: 'Playfair Display', Georgia, serif;
     --font-body: 'Plus Jakarta Sans', sans-serif;
 
-    --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    --transition: all 0.3s ease;
 }
 
 *, *::before, *::after {
@@ -38,14 +38,16 @@
 
 html, body {
     width: 100%;
-    height: 100%;
-    overflow: hidden;
+    min-height: 100vh;
+    overflow-x: hidden;
+    overflow-y: auto;
     background-color: var(--bg-main);
     color: var(--text-primary);
     font-family: var(--font-body);
+    scroll-behavior: smooth;
 }
 
-/* Custom Scrollbar for the Brochure Modal */
+/* Custom Scrollbar */
 ::-webkit-scrollbar {
     width: 8px;
 }
@@ -61,96 +63,17 @@ html, body {
     background: var(--gold-dark);
 }
 
-/* Custom Cursor */
-@media (hover: hover) and (pointer: fine) {
-    body {
-        cursor: none;
-    }
-    .custom-cursor-dot {
-        position: fixed;
-        top: -4px;
-        left: -4px;
-        width: 8px;
-        height: 8px;
-        background: var(--gold-light);
-        border-radius: 50%;
-        pointer-events: none;
-        z-index: 99999;
-        box-shadow: 0 0 10px var(--gold-primary);
-        transition: transform 0.05s ease-out;
-    }
-    .custom-cursor-ring {
-        position: fixed;
-        top: -18px;
-        left: -18px;
-        width: 36px;
-        height: 36px;
-        border: 1px solid rgba(229, 184, 105, 0.45);
-        border-radius: 50%;
-        pointer-events: none;
-        z-index: 99998;
-        transition: width 0.25s, height 0.25s, border-color 0.25s, top 0.25s, left 0.25s;
-    }
-    .custom-cursor-ring.cursor-hover {
-        width: 52px;
-        height: 52px;
-        top: -26px;
-        left: -26px;
-        border-color: var(--gold-primary);
-        background: rgba(229, 184, 105, 0.1);
-    }
-}
-@media (hover: none) or (pointer: coarse) {
-    .custom-cursor-dot, .custom-cursor-ring {
-        display: none !important;
-    }
-}
-
-/* Ambient Fancy Background Lights (Optimized 60FPS) */
+/* Ambient Fancy Background Lights (Static, zero GPU cost) */
 .ambient-glow-bg {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
     pointer-events: none;
     z-index: 0;
-    overflow: hidden;
-}
-.glow-orb {
-    position: absolute;
-    border-radius: 50%;
-    pointer-events: none;
-    will-change: transform;
-    animation: orbPulse 18s infinite alternate ease-in-out;
-}
-.glow-orb-amber {
-    top: -15%;
-    right: 5%;
-    width: 650px;
-    height: 650px;
-    background: radial-gradient(circle, rgba(229, 184, 105, 0.22) 0%, rgba(229, 184, 105, 0.08) 40%, transparent 70%);
-}
-.glow-orb-rose {
-    bottom: -15%;
-    left: 5%;
-    width: 750px;
-    height: 750px;
-    background: radial-gradient(circle, rgba(133, 36, 34, 0.28) 0%, rgba(89, 19, 18, 0.08) 45%, transparent 70%);
-    animation-delay: -9s;
-}
-.glow-orb-center {
-    top: 30%;
-    left: 30%;
-    width: 480px;
-    height: 480px;
-    background: radial-gradient(circle, rgba(66, 22, 20, 0.15) 0%, transparent 70%);
-}
-
-@keyframes orbPulse {
-    0% { transform: scale(1) translate(0, 0); }
-    50% { transform: scale(1.1) translate(20px, -15px); }
-    100% { transform: scale(0.95) translate(-15px, 20px); }
+    background: radial-gradient(circle at 85% 10%, rgba(229, 184, 105, 0.12) 0%, transparent 60%),
+                radial-gradient(circle at 15% 90%, rgba(133, 36, 34, 0.18) 0%, transparent 60%);
 }
 
 .wood-grain-overlay {
@@ -166,72 +89,20 @@ html, body {
     background-size: 32px 32px;
 }
 
-/* Mystical Atmospheric Fog Layers (Optimized) */
-.mystic-fog-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    pointer-events: none;
-    z-index: 15;
-    opacity: 0;
-    transition: opacity 1.2s ease-in-out;
-    overflow: hidden;
-}
-.mystic-fog-container.active {
-    opacity: 0.7;
-}
-
-.fog-layer {
-    position: absolute;
-    width: 250%;
-    height: 100%;
-    background-repeat: repeat-x;
-}
-.fog-layer-1 {
-    bottom: -10%;
-    left: -50%;
-    height: 60%;
-    background: radial-gradient(ellipse at 50% 90%, rgba(240, 215, 170, 0.25) 0%, rgba(210, 160, 90, 0.1) 45%, transparent 75%);
-    will-change: transform;
-    animation: fogDrift 24s infinite linear alternate;
-}
-.fog-layer-2 {
-    bottom: -5%;
-    left: 0%;
-    height: 45%;
-    background: radial-gradient(ellipse at 40% 80%, rgba(255, 230, 185, 0.2) 0%, rgba(133, 36, 34, 0.1) 50%, transparent 70%);
-    will-change: transform;
-    animation: fogDrift 18s infinite linear alternate-reverse;
-}
-.fog-layer-3 {
-    top: 25%;
-    left: -20%;
-    height: 40%;
-    background: radial-gradient(ellipse at 50% 50%, rgba(229, 184, 105, 0.1) 0%, transparent 60%);
-    will-change: transform;
-    animation: fogDrift 30s infinite linear alternate;
-}
-
-@keyframes fogDrift {
-    0% { transform: translateX(0); }
-    50% { transform: translateX(-12%); }
-    100% { transform: translateX(8%); }
-}
-
 /* Minimalist Top Header */
 .minimal-header {
-    position: fixed;
+    position: sticky;
     top: 0;
     left: 0;
     width: 100%;
-    padding: 20px 36px;
+    padding: 18px 40px;
     display: flex;
-    align-items: center;
     justify-content: space-between;
+    align-items: center;
     z-index: 50;
-    background: linear-gradient(180deg, rgba(10, 7, 5, 0.8) 0%, transparent 100%);
+    background: rgba(11, 8, 6, 0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(229, 184, 105, 0.15);
 }
 
 .brand-emblem {
@@ -239,187 +110,83 @@ html, body {
     align-items: center;
     gap: 14px;
     text-decoration: none;
-    cursor: pointer;
+    color: inherit;
 }
+
 .brand-monogram-img {
-    height: 44px;
-    width: auto;
+    width: 42px;
+    height: 42px;
+    object-fit: contain;
     border-radius: 50%;
     border: 1px solid var(--border-gold);
     box-shadow: 0 0 15px var(--gold-glow);
-    transition: var(--transition);
 }
-.brand-emblem:hover .brand-monogram-img {
-    transform: scale(1.08) rotate(4deg);
-}
+
 .brand-label {
     display: flex;
     flex-direction: column;
 }
+
 .brand-name {
-    font-family: var(--font-serif);
-    font-size: 1.4rem;
+    font-family: var(--font-heading);
+    font-size: 1.25rem;
     font-weight: 700;
-    letter-spacing: 1px;
-    color: var(--text-primary);
-    line-height: 1;
+    letter-spacing: 3px;
+    color: var(--gold-light);
+    text-transform: uppercase;
 }
+
 .brand-tag {
     font-size: 0.65rem;
-    letter-spacing: 2px;
+    letter-spacing: 1.8px;
     text-transform: uppercase;
-    color: var(--gold-primary);
-    margin-top: 3px;
+    color: var(--text-muted);
 }
 
 .header-right-actions {
     display: flex;
     align-items: center;
-    gap: 14px;
+    gap: 12px;
 }
 
-.brochure-nav-btn {
-    background: rgba(229, 184, 105, 0.12);
-    border: 1px solid var(--border-gold-bright);
-    color: var(--gold-light);
-    border-radius: 20px;
-    padding: 8px 18px;
-    font-size: 0.74rem;
-    letter-spacing: 1.2px;
-    text-transform: uppercase;
+.btn-gold-header {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    cursor: pointer;
-    backdrop-filter: blur(10px);
-    transition: var(--transition);
-}
-.brochure-nav-btn:hover {
-    background: var(--gold-primary);
+    background: linear-gradient(135deg, #f0ca7d 0%, #d4a045 50%, #b88226 100%);
     color: #120907;
-    box-shadow: 0 0 20px var(--gold-glow);
-    transform: translateY(-2px);
-}
-
-.sound-toggle-btn {
-    background: rgba(18, 12, 10, 0.7);
-    border: 1px solid var(--border-gold);
-    color: var(--gold-light);
-    border-radius: 20px;
-    padding: 8px 16px;
-    font-size: 0.72rem;
-    letter-spacing: 1.2px;
-    display: inline-flex;
-    align-items: center;
-    gap: 7px;
-    cursor: pointer;
-    backdrop-filter: blur(10px);
-    transition: var(--transition);
-}
-.sound-toggle-btn:hover {
-    border-color: var(--gold-primary);
-    box-shadow: 0 0 15px var(--gold-glow);
-}
-.sound-toggle-btn.muted {
-    opacity: 0.55;
-}
-
-/* Fullscreen 3D Stage */
-.main-3d-stage {
-    position: relative;
-    width: 100vw;
-    height: 100vh;
-    z-index: 10;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-#three-canvas-container {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    cursor: grab;
-}
-#three-canvas-container:active {
-    cursor: grabbing;
-}
-
-/* Floating Prompt Pill Below Gift Box */
-.giftbox-prompt-pill {
-    position: absolute;
-    bottom: 50px;
-    z-index: 20;
-    display: inline-flex;
-    align-items: center;
-    gap: 12px;
-    background: rgba(22, 14, 11, 0.88);
-    border: 1px solid var(--border-gold-bright);
-    backdrop-filter: blur(16px);
-    padding: 14px 28px;
-    border-radius: 35px;
     font-family: var(--font-heading);
-    font-size: 0.86rem;
-    letter-spacing: 2px;
+    font-weight: 700;
+    font-size: 0.74rem;
+    letter-spacing: 1.5px;
     text-transform: uppercase;
-    color: var(--gold-light);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7), 0 0 25px var(--gold-glow);
+    padding: 9px 18px;
+    border: none;
+    border-radius: 6px;
     cursor: pointer;
+    box-shadow: 0 4px 15px rgba(212, 160, 69, 0.3);
     transition: var(--transition);
-    animation: floatBounce 3s infinite ease-in-out;
 }
-.giftbox-prompt-pill:hover {
-    transform: translateY(-4px) scale(1.03);
-    border-color: #fff;
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.8), 0 0 35px var(--gold-glow);
-}
-.sparkle-icon {
-    color: var(--gold-primary);
-    animation: spinSlow 8s linear infinite;
-}
-
-@keyframes floatBounce {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-8px); }
-}
-@keyframes spinSlow {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
+.btn-gold-header:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(229, 184, 105, 0.5);
 }
 
 /* ==========================================================================
-   THE SINGLE PAGE BROCHURE MODAL (SMOOTH VERTICAL SCROLLING UP-DOWN)
+   THE SINGLE PAGE BROCHURE (DIRECT IN-FLOW DISPLAY)
    ========================================================================== */
-.brochure-modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    z-index: 100;
-    background: rgba(8, 5, 4, 0.85);
-    backdrop-filter: blur(18px);
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
+.brochure-page-container {
+    position: relative;
+    z-index: 10;
+    width: 100%;
     display: flex;
     justify-content: center;
-    align-items: flex-start;
-    padding: 50px 20px 60px;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-}
-.brochure-modal-overlay.active {
-    opacity: 1;
-    pointer-events: auto;
+    padding: 40px 20px 80px;
 }
 
 .brochure-sheet-wrapper {
-    max-width: 840px;
+    max-width: 860px;
     width: 100%;
-    margin: auto 0;
     display: flex;
     justify-content: center;
 }
@@ -428,20 +195,15 @@ html, body {
 .single-page-brochure {
     position: relative;
     width: 100%;
-    background: linear-gradient(155deg, #22120e 0%, #120907 45%, #251310 100%);
+    background: linear-gradient(155deg, #1f100d 0%, #100806 45%, #22120e 100%);
     border: 2px solid var(--gold-primary);
     border-radius: 20px;
-    padding: 48px 44px 40px;
-    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.95), 0 0 45px var(--gold-glow);
+    padding: 48px 44px 44px;
+    box-shadow: 0 25px 70px rgba(0, 0, 0, 0.95), 0 0 35px var(--gold-glow);
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 32px;
-    transform: scale(0.92) translateY(25px);
-    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-}
-.brochure-modal-overlay.active .single-page-brochure {
-    transform: scale(1) translateY(0);
 }
 
 /* Inner gold borderline */
@@ -487,32 +249,6 @@ html, body {
     border-top: none;
 }
 
-/* Reseal / Close Button */
-.close-brochure-btn {
-    position: absolute;
-    top: 24px;
-    right: 28px;
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid var(--border-gold);
-    color: var(--gold-light);
-    border-radius: 20px;
-    padding: 7px 16px;
-    font-size: 0.74rem;
-    letter-spacing: 1.2px;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: var(--transition);
-    z-index: 10;
-}
-.close-brochure-btn:hover {
-    background: var(--gold-primary);
-    color: #120907;
-    box-shadow: 0 0 15px var(--gold-glow);
-}
-
 /* 1. Official Logo Plaque: 100% Crisp & High-Contrast */
 .brochure-logo-frame {
     background: #FAF3E2;
@@ -544,19 +280,19 @@ html, body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 10px;
-    max-width: 620px;
+    gap: 12px;
+    max-width: 640px;
 }
 .brochure-top-badge {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    padding: 5px 16px;
+    padding: 6px 18px;
     background: rgba(133, 36, 34, 0.25);
-    border: 1px solid rgba(184, 59, 56, 0.4);
+    border: 1px solid rgba(184, 59, 56, 0.45);
     border-radius: 20px;
     font-family: var(--font-heading);
-    font-size: 0.7rem;
+    font-size: 0.72rem;
     letter-spacing: 2px;
     text-transform: uppercase;
     color: #fca5a5;
@@ -575,7 +311,7 @@ html, body {
     background-size: 200% auto;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    animation: goldShimmer 5s linear infinite;
+    animation: goldShimmer 6s linear infinite;
 }
 @keyframes goldShimmer {
     0% { background-position: 0% 50%; }
@@ -583,9 +319,9 @@ html, body {
 }
 
 .brochure-subtitle {
-    font-size: 0.95rem;
+    font-size: 0.96rem;
     color: var(--text-secondary);
-    line-height: 1.6;
+    line-height: 1.65;
     font-weight: 300;
 }
 
@@ -595,11 +331,11 @@ html, body {
     background: linear-gradient(180deg, rgba(28, 17, 13, 0.9) 0%, rgba(14, 9, 7, 0.95) 100%);
     border: 1px solid var(--border-gold);
     border-radius: 12px;
-    padding: 20px 24px;
+    padding: 22px 24px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 12px;
+    gap: 14px;
 }
 .timer-card-title {
     display: inline-flex;
@@ -622,8 +358,8 @@ html, body {
     background: rgba(10, 6, 5, 0.75);
     border: 1px solid var(--border-gold);
     border-radius: 8px;
-    padding: 10px 16px;
-    min-width: 68px;
+    padding: 10px 18px;
+    min-width: 72px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -631,14 +367,14 @@ html, body {
 }
 .timer-num {
     font-family: var(--font-heading);
-    font-size: 1.9rem;
+    font-size: 2rem;
     font-weight: 800;
     line-height: 1;
     color: var(--gold-light);
     text-shadow: 0 0 12px var(--gold-glow);
 }
 .timer-label {
-    font-size: 0.62rem;
+    font-size: 0.64rem;
     letter-spacing: 1.5px;
     text-transform: uppercase;
     color: var(--text-muted);
@@ -652,85 +388,7 @@ html, body {
     margin-bottom: 12px;
 }
 
-/* 4. Mystery Collection (Flashy Ideas to Guess Upcoming Gifts) */
-.brochure-mystery-section {
-    width: 100%;
-    background: rgba(10, 6, 5, 0.65);
-    border: 1px solid rgba(229, 184, 105, 0.2);
-    border-radius: 14px;
-    padding: 26px 24px;
-    display: flex;
-    flex-direction: column;
-    gap: 18px;
-}
-.mystery-section-header {
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 6px;
-}
-.mystery-tag {
-    font-size: 0.68rem;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--gold-primary);
-    font-family: var(--font-heading);
-}
-.mystery-headline {
-    font-family: var(--font-serif);
-    font-size: 1.55rem;
-    color: var(--text-primary);
-}
-.mystery-sub {
-    font-size: 0.85rem;
-    color: var(--text-muted);
-}
-
-.mystery-clues-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 12px;
-}
-.clue-item {
-    background: rgba(22, 14, 11, 0.7);
-    border: 1px solid rgba(229, 184, 105, 0.15);
-    border-radius: 8px;
-    padding: 14px 18px;
-    display: flex;
-    align-items: flex-start;
-    gap: 14px;
-    transition: var(--transition);
-}
-.clue-item:hover {
-    border-color: var(--gold-primary);
-    background: rgba(229, 184, 105, 0.08);
-}
-.clue-icon {
-    width: 38px;
-    height: 38px;
-    border-radius: 8px;
-    background: rgba(229, 184, 105, 0.12);
-    border: 1px solid var(--border-gold);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--gold-primary);
-    flex-shrink: 0;
-}
-.clue-title {
-    font-family: var(--font-serif);
-    font-size: 1.05rem;
-    color: var(--gold-light);
-    margin-bottom: 3px;
-}
-.clue-desc {
-    font-size: 0.84rem;
-    color: var(--text-secondary);
-    line-height: 1.5;
-}
-
-/* 5. Botanical Duality Bar */
+/* 4. Botanical Duality Bar */
 .brochure-duality-bar {
     width: 100%;
     display: flex;
@@ -738,8 +396,8 @@ html, body {
     justify-content: space-around;
     background: rgba(18, 11, 8, 0.8);
     border: 1px solid var(--border-gold);
-    border-radius: 10px;
-    padding: 16px 20px;
+    border-radius: 12px;
+    padding: 18px 22px;
     gap: 16px;
     flex-wrap: wrap;
 }
@@ -748,16 +406,16 @@ html, body {
     flex-direction: column;
     align-items: center;
     text-align: center;
-    gap: 4px;
+    gap: 6px;
     flex: 1;
-    min-width: 220px;
+    min-width: 240px;
 }
 .wood-badge {
     font-family: var(--font-heading);
-    font-size: 0.76rem;
+    font-size: 0.78rem;
     letter-spacing: 1.5px;
     text-transform: uppercase;
-    padding: 4px 12px;
+    padding: 4px 14px;
     border-radius: 12px;
 }
 .gold-badge {
@@ -771,22 +429,23 @@ html, body {
     color: #fca5a5;
 }
 .wood-mini-text {
-    font-size: 0.78rem;
+    font-size: 0.8rem;
     color: var(--text-secondary);
+    line-height: 1.4;
 }
 .duality-divider {
     width: 1px;
-    height: 45px;
+    height: 48px;
     background: rgba(229, 184, 105, 0.25);
 }
 
-/* 6. VIP Reservation Card */
+/* 5. VIP Reservation Card */
 .brochure-vip-card {
     width: 100%;
     background: linear-gradient(135deg, rgba(30, 18, 14, 0.95) 0%, rgba(18, 10, 8, 0.98) 100%);
     border: 1px solid var(--border-gold-bright);
     border-radius: 12px;
-    padding: 24px;
+    padding: 26px;
     display: flex;
     flex-direction: column;
     gap: 14px;
@@ -794,15 +453,16 @@ html, body {
 }
 .vip-headline {
     font-family: var(--font-serif);
-    font-size: 1.4rem;
+    font-size: 1.45rem;
     color: var(--text-primary);
     margin-bottom: 4px;
 }
 .vip-sub {
-    font-size: 0.85rem;
+    font-size: 0.86rem;
     color: var(--text-secondary);
     max-width: 580px;
     margin: 0 auto;
+    line-height: 1.5;
 }
 .vip-input-row {
     display: flex;
@@ -816,9 +476,9 @@ html, body {
     background: rgba(10, 6, 5, 0.85);
     border: 1px solid var(--border-gold);
     border-radius: 6px;
-    padding: 11px 16px;
+    padding: 12px 16px;
     color: #fff;
-    font-size: 0.88rem;
+    font-size: 0.9rem;
     outline: none;
     font-family: var(--font-body);
     transition: var(--transition);
@@ -831,7 +491,7 @@ html, body {
     color: var(--text-muted);
 }
 .notify-feedback {
-    font-size: 0.78rem;
+    font-size: 0.82rem;
     color: var(--gold-light);
     margin-top: 6px;
     opacity: 0;
@@ -841,7 +501,7 @@ html, body {
     opacity: 1;
 }
 
-/* 7. Action Footer */
+/* 6. Action Footer */
 .brochure-footer-actions {
     display: flex;
     align-items: center;
@@ -850,12 +510,13 @@ html, body {
     flex-wrap: wrap;
     width: 100%;
     border-top: 1px solid rgba(229, 184, 105, 0.15);
-    padding-top: 20px;
+    padding-top: 24px;
 }
 .brochure-copyright {
-    font-size: 0.7rem;
+    font-size: 0.72rem;
     color: var(--text-muted);
     text-align: center;
+    line-height: 1.5;
 }
 
 /* Buttons */
@@ -868,10 +529,10 @@ html, body {
     color: #120907;
     font-family: var(--font-heading);
     font-weight: 700;
-    font-size: 0.8rem;
+    font-size: 0.82rem;
     letter-spacing: 1.5px;
     text-transform: uppercase;
-    padding: 12px 22px;
+    padding: 13px 24px;
     border: none;
     border-radius: 6px;
     cursor: pointer;
@@ -884,57 +545,36 @@ html, body {
     box-shadow: 0 6px 25px rgba(229, 184, 105, 0.55);
 }
 
-.btn-outline-gold {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    background: rgba(229, 184, 105, 0.08);
-    border: 1px solid var(--border-gold-bright);
-    color: var(--gold-light);
-    font-family: var(--font-heading);
-    font-weight: 600;
-    font-size: 0.8rem;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    padding: 11px 20px;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: var(--transition);
-    backdrop-filter: blur(8px);
-    white-space: nowrap;
-}
-.btn-outline-gold:hover {
-    background: rgba(229, 184, 105, 0.18);
-    border-color: #fff;
-    box-shadow: 0 0 20px var(--gold-glow);
-    transform: translateY(-2px);
-}
-
 /* Responsive */
 @media (max-width: 680px) {
     .minimal-header {
-        padding: 16px 20px;
+        padding: 14px 18px;
     }
-    .brochure-modal-overlay {
-        padding: 20px 12px 40px;
+    .brand-name {
+        font-size: 1.05rem;
+    }
+    .btn-gold-header span {
+        display: none;
+    }
+    .btn-gold-header {
+        padding: 8px 12px;
+    }
+    .brochure-page-container {
+        padding: 24px 12px 60px;
     }
     .single-page-brochure {
-        padding: 36px 20px 28px;
+        padding: 36px 18px 28px;
         gap: 24px;
-    }
-    .close-brochure-btn span {
-        display: none;
     }
     .timer-units-row {
         gap: 6px;
     }
     .timer-unit-block {
-        min-width: 54px;
+        min-width: 56px;
         padding: 8px 10px;
     }
     .timer-num {
-        font-size: 1.5rem;
+        font-size: 1.55rem;
     }
     .vip-input-row {
         flex-direction: column;
