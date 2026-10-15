@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SandRose | Coming Soon</title>
+    <title>SandRose | Premium Wooden Gifting • Coming Soon</title>
     
     <meta name="description" content="SandRose - Premium Wooden Gifting. Made from Authentic Sandalwood & Rosewood. Coming Soon.">
-    <meta name="theme-color" content="#0B0806">
+    <meta name="theme-color" content="#FFFFFF">
 
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="assets/favicon.png">
@@ -14,74 +14,64 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 
     <!-- Stylesheet -->
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-    <!-- Ambient Subtle Background -->
-    <div class="ambient-glow-bg"></div>
-
-    <!-- Main Container (Centered Landing Page) -->
-    <main class="landing-container">
+    <!-- Main Centered Container -->
+    <main class="page-container">
         
-        <!-- Luxury Card -->
-        <div class="landing-card">
-            
-            <!-- Corner Filigree Accents -->
-            <div class="corner-accent top-left"></div>
-            <div class="corner-accent top-right"></div>
-            <div class="corner-accent bottom-left"></div>
-            <div class="corner-accent bottom-right"></div>
+        <div class="coming-soon-card">
 
-            <!-- Authentic SandRose Logo Plaque -->
-            <div class="logo-wrapper">
-                <img src="assets/logo.jpg" alt="SandRose - Premium Wooden Gifting • Made from Authentic Sandalwood & Rosewood" class="logo-image">
+            <!-- Logo (Clean transparent cutout, sits directly on white) -->
+            <div class="logo-container">
+                <img src="assets/logo-transparent.png" alt="SandRose - Premium Wooden Gifting • Made from Authentic Sandalwood & Rosewood" class="brand-logo">
             </div>
 
-            <!-- Coming Soon Heading -->
-            <div class="heading-group">
-                <span class="badge">Atelier Premiere</span>
-                <h1 class="coming-soon-title">COMING SOON</h1>
-                <p class="tagline">Crafting timeless wooden gifting heirlooms. Launching soon.</p>
+            <!-- Coming Soon Title -->
+            <div class="title-section">
+                <span class="status-badge">Grand Opening</span>
+                <h1 class="main-title">COMING SOON</h1>
+                <p class="subtitle">Crafting timeless wooden gifting heirlooms. Launching in one week.</p>
             </div>
 
             <!-- 1-Week Countdown Timer -->
-            <div class="timer-container">
-                <div class="timer-box">
-                    <span class="timer-number" id="timer-days">07</span>
-                    <span class="timer-label">Days</span>
+            <div class="timer-wrapper">
+                <div class="timer-cell">
+                    <span class="timer-digits" id="timer-days">07</span>
+                    <span class="timer-unit">Days</span>
                 </div>
-                <span class="timer-colon">:</span>
-                <div class="timer-box">
-                    <span class="timer-number" id="timer-hours">00</span>
-                    <span class="timer-label">Hours</span>
+                <span class="timer-divider">:</span>
+                <div class="timer-cell">
+                    <span class="timer-digits" id="timer-hours">00</span>
+                    <span class="timer-unit">Hours</span>
                 </div>
-                <span class="timer-colon">:</span>
-                <div class="timer-box">
-                    <span class="timer-number" id="timer-minutes">00</span>
-                    <span class="timer-label">Minutes</span>
+                <span class="timer-divider">:</span>
+                <div class="timer-cell">
+                    <span class="timer-digits" id="timer-minutes">00</span>
+                    <span class="timer-unit">Minutes</span>
                 </div>
-                <span class="timer-colon">:</span>
-                <div class="timer-box">
-                    <span class="timer-number" id="timer-seconds">00</span>
-                    <span class="timer-label">Seconds</span>
+                <span class="timer-divider">:</span>
+                <div class="timer-cell">
+                    <span class="timer-digits" id="timer-seconds">00</span>
+                    <span class="timer-unit">Seconds</span>
                 </div>
             </div>
 
-            <!-- Simple Notify Me Form -->
+            <!-- Simple Notify Me Input -->
             <form id="notify-form" class="notify-form">
-                <div class="input-group">
+                <div class="input-row">
                     <input type="email" id="notify-email" placeholder="Enter your email address" required aria-label="Email address">
-                    <button type="submit" class="notify-btn">Notify Me</button>
+                    <button type="submit" class="submit-btn">Notify Me</button>
                 </div>
                 <p id="notify-msg" class="notify-msg"></p>
             </form>
 
             <!-- Minimal Footer -->
-            <footer class="card-footer">
+            <footer class="page-footer">
                 <p>&copy; 2026 SandRose. All rights reserved.</p>
             </footer>
 
@@ -89,7 +79,7 @@
 
     </main>
 
-    <!-- Application Script -->
+    <!-- Timer & Form Script -->
     <script src="app.js"></script>
 </body>
 </html>
